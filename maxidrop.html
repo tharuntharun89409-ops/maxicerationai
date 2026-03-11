@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Dropship Store</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    }
+   
+    * {
+      box-sizing: border-box;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1920&h=600&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .cart-badge {
+      animation: bounce 0.5s ease;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .modal-backdrop {
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 bg-gray-50">
+  <div id="app" class="h-full w-full overflow-auto"><!-- Header -->
+   <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+     <div class="flex justify-between items-center">
+      <div class="flex items-center gap-4">
+       <div class="relative w-20 h-20 transform hover:rotate-12 hover:scale-110 transition-all duration-300">
+        <div class="absolute inset-0 bg-gradient-to-tr from-purple-600 via-pink-500 to-orange-400 rounded-2xl rotate-6 shadow-2xl"></div>
+        <div class="absolute inset-0 bg-gradient-to-bl from-cyan-400 via-blue-500 to-purple-600 rounded-2xl -rotate-6 opacity-80 shadow-2xl"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+         <svg viewbox="0 0 100 100" class="w-12 h-12"><defs>
+           <lineargradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#fde047;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+           </lineargradient>
+          </defs> <text x="50" y="70" font-family="Arial, sans-serif" font-size="70" font-weight="900" fill="url(#logoGradient)" text-anchor="middle" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+           M
+          </text> <circle cx="80" cy="25" r="8" fill="#fde047" opacity="0.9">
+           <animate attributename="opacity" values="0.9;0.3;0.9" dur="2s" repeatcount="indefinite" />
+          </circle>
+         </svg>
+        </div>
+       </div>
+       <div>
+        <h1 id="storeName" class="text-4xl font-black text-gray-900 tracking-tight uppercase" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">MAX AI DROPSHIP STORE</h1>
+        <p id="tagline" class="text-sm text-gray-600 font-medium mt-1">World-first where we meet the technology and trust of the customer</p>
+       </div>
+      </div><button id="cartBtn" class="relative bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"> Shopping Cart of Max.ai (<span id="cartCount">0</span>) </button>
+     </div>
+    </div>
+   </header><!-- Hero Section -->
+   <section id="heroSection" class="hero-gradient text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Main Hero Content -->
+     <div class="text-center mb-20">
+      <h2 id="heroTitle" class="text-6xl font-black mb-6 leading-tight">Classic &amp; Trendy Fashion Look</h2>
+      <p id="heroSubtitle" class="text-2xl mb-10 text-purple-100 max-w-4xl mx-auto">Shop the latest trends in makeup, fashion, electronics, and mobile devices</p><button id="ctaButton" class="bg-white text-gray-900 hover:bg-gray-100 px-12 py-6 rounded-full font-bold text-2xl transition-all transform hover:scale-105 shadow-2xl">Shop Now</button>
+     </div><!-- About Section -->
+     <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-12 mb-16 border border-white border-opacity-20 shadow-2xl">
+      <div class="text-center mb-12">
+       <h3 class="text-4xl font-bold mb-6 text-white">Welcome to Max AI Dropship Store</h3>
+       <div class="w-32 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-8"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12 mb-12">
+       <div class="space-y-6">
+        <div class="flex items-start gap-4">
+         <div class="text-4xl">
+          ??
+         </div>
+         <div>
+          <h4 class="text-2xl font-bold mb-3 text-yellow-300">World-First Technology Meets Trust</h4>
+          <p class="text-lg text-gray-100 leading-relaxed">At Max AI Dropship Store, we revolutionize online shopping by combining cutting-edge artificial intelligence with the warmth of customer-first service. We're not just a store   we're your trusted shopping companion.</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="text-4xl">
+          ??
+         </div>
+         <div>
+          <h4 class="text-2xl font-bold mb-3 text-yellow-300">Our Mission</h4>
+          <p class="text-lg text-gray-100 leading-relaxed">To deliver premium quality products across makeup, fashion, electronics, and mobile devices with lightning-fast delivery and unbeatable prices. Every purchase is backed by our 100% authenticity guarantee.</p>
+         </div>
+        </div>
+       </div>
+       <div class="space-y-6">
+        <div class="flex items-start gap-4">
+         <div class="text-4xl">
+          ?
+         </div>
+         <div>
+          <h4 class="text-2xl font-bold mb-3 text-yellow-300">Why Choose Us?</h4>
+          <ul class="text-lg text-gray-100 space-y-3">
+           <li class="flex items-center gap-3"><span class="text-green-400 text-2xl">?</span> AI-Powered Product Recommendations</li>
+           <li class="flex items-center gap-3"><span class="text-green-400 text-2xl">?</span> Verified Authentic Products Only</li>
+           <li class="flex items-center gap-3"><span class="text-green-400 text-2xl">?</span> 24/7 Customer Support</li>
+           <li class="flex items-center gap-3"><span class="text-green-400 text-2xl">?</span> Easy Returns &amp; Refunds</li>
+           <li class="flex items-center gap-3"><span class="text-green-400 text-2xl">?</span> Secure Payment Gateway</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div><!-- Categories Overview -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+       <div class="bg-white bg-opacity-10 p-6 rounded-2xl text-center hover:bg-opacity-20 transition-all transform hover:scale-105">
+        <div class="text-5xl mb-3">
+         ??
+        </div>
+        <h5 class="text-xl font-bold mb-2">Makeup &amp; Beauty</h5>
+        <p class="text-sm text-gray-200">Premium cosmetics &amp; skincare</p>
+       </div>
+       <div class="bg-white bg-opacity-10 p-6 rounded-2xl text-center hover:bg-opacity-20 transition-all transform hover:scale-105">
+        <div class="text-5xl mb-3">
+         ??
+        </div>
+        <h5 class="text-xl font-bold mb-2">Fashion</h5>
+        <p class="text-sm text-gray-200">Trendy clothing &amp; accessories</p>
+       </div>
+       <div class="bg-white bg-opacity-10 p-6 rounded-2xl text-center hover:bg-opacity-20 transition-all transform hover:scale-105">
+        <div class="text-5xl mb-3">
+         ??
+        </div>
+        <h5 class="text-xl font-bold mb-2">Electronics</h5>
+        <p class="text-sm text-gray-200">Latest gadgets &amp; devices</p>
+       </div>
+       <div class="bg-white bg-opacity-10 p-6 rounded-2xl text-center hover:bg-opacity-20 transition-all transform hover:scale-105">
+        <div class="text-5xl mb-3">
+         ??
+        </div>
+        <h5 class="text-xl font-bold mb-2">Mobiles</h5>
+        <p class="text-sm text-gray-200">Top smartphone brands</p>
+       </div>
+      </div>
+     </div><!-- Branch Locations -->
+     <div class="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-12 shadow-2xl">
+      <div class="text-center mb-12">
+       <h3 class="text-4xl font-bold mb-4 text-white">Our Branch Locations</h3>
+       <p class="text-xl text-purple-100">Visit us at any of our premium stores across India</p>
+       <div class="w-32 h-1 bg-white mx-auto mt-6"></div>
+      </div>
+      <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-6"><!-- Chennai Branch -->
+       <div class="bg-white rounded-2xl p-6 shadow-xl transform hover:scale-105 transition-all">
+        <div class="text-center">
+         <div class="text-5xl mb-4">
+          ??
+         </div>
+         <h4 class="text-2xl font-bold text-gray-900 mb-3">Chennai</h4>
+         <div class="space-y-2 text-gray-700">
+          <p class="font-medium">?? Max AI Store</p>
+          <p class="text-sm leading-relaxed">123 Anna Salai, T. Nagar, Chennai - 600017</p>
+          <p class="text-sm font-semibold text-purple-600 mt-3">?? +91 98765 10001</p>
+          <p class="text-xs text-gray-500 mt-2">Mon-Sun: 10 AM - 9 PM</p>
+         </div>
+        </div>
+       </div><!-- Bangalore Branch -->
+       <div class="bg-white rounded-2xl p-6 shadow-xl transform hover:scale-105 transition-all">
+        <div class="text-center">
+         <div class="text-5xl mb-4">
+          ??
+         </div>
+         <h4 class="text-2xl font-bold text-gray-900 mb-3">Bangalore</h4>
+         <div class="space-y-2 text-gray-700">
+          <p class="font-medium">?? Max AI Store</p>
+          <p class="text-sm leading-relaxed">456 MG Road, Shivaji Nagar, Bangalore - 560001</p>
+          <p class="text-sm font-semibold text-purple-600 mt-3">?? +91 98765 20002</p>
+          <p class="text-xs text-gray-500 mt-2">Mon-Sun: 10 AM - 9 PM</p>
+         </div>
+        </div>
+       </div><!-- Hyderabad Branch -->
+       <div class="bg-white rounded-2xl p-6 shadow-xl transform hover:scale-105 transition-all">
+        <div class="text-center">
+         <div class="text-5xl mb-4">
+          ??
+         </div>
+         <h4 class="text-2xl font-bold text-gray-900 mb-3">Hyderabad</h4>
+         <div class="space-y-2 text-gray-700">
+          <p class="font-medium">?? Max AI Store</p>
+          <p class="text-sm leading-relaxed">789 Banjara Hills Road No.12, Hyderabad - 500034</p>
+          <p class="text-sm font-semibold text-purple-600 mt-3">?? +91 98765 30003</p>
+          <p class="text-xs text-gray-500 mt-2">Mon-Sun: 10 AM - 9 PM</p>
+         </div>
+        </div>
+       </div><!-- Pune Branch -->
+       <div class="bg-white rounded-2xl p-6 shadow-xl transform hover:scale-105 transition-all">
+        <div class="text-center">
+         <div class="text-5xl mb-4">
+          ??
+         </div>
+         <h4 class="text-2xl font-bold text-gray-900 mb-3">Pune</h4>
+         <div class="space-y-2 text-gray-700">
+          <p class="font-medium">?? Max AI Store</p>
+          <p class="text-sm leading-relaxed">321 FC Road, Deccan Gymkhana, Pune - 411004</p>
+          <p class="text-sm font-semibold text-purple-600 mt-3">?? +91 98765 40004</p>
+          <p class="text-xs text-gray-500 mt-2">Mon-Sun: 10 AM - 9 PM</p>
+         </div>
+        </div>
+       </div><!-- Agra Branch -->
+       <div class="bg-white rounded-2xl p-6 shadow-xl transform hover:scale-105 transition-all">
+        <div class="text-center">
+         <div class="text-5xl mb-4">
+          ??
+         </div>
+         <h4 class="text-2xl font-bold text-gray-900 mb-3">Agra</h4>
+         <div class="space-y-2 text-gray-700">
+          <p class="font-medium">?? Max AI Store</p>
+          <p class="text-sm leading-relaxed">567 Sanjay Place, MG Road, Agra - 282002</p>
+          <p class="text-sm font-semibold text-purple-600 mt-3">?? +91 98765 50005</p>
+          <p class="text-xs text-gray-500 mt-2">Mon-Sun: 10 AM - 9 PM</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Special Note -->
+      <div class="mt-12 bg-white bg-opacity-20 rounded-2xl p-8 text-center border border-white border-opacity-30">
+       <p class="text-xl font-semibold text-white mb-3">?? Grand Opening Offers Available at All Branches!</p>
+       <p class="text-lg text-purple-100">Visit any of our stores for exclusive in-store discounts and personalized shopping assistance</p>
+      </div>
+     </div><!-- Call to Action -->
+     <div class="text-center mt-16"><button id="startShoppingBtn" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 hover:from-yellow-500 hover:to-orange-600 px-16 py-6 rounded-full font-black text-2xl transition-all transform hover:scale-110 shadow-2xl animate-pulse"> ??? Start Shopping Now </button>
+      <p class="text-lg text-purple-100 mt-6">Browse 1500+ Premium Products</p>
+     </div>
+    </div>
+   </section><!-- Search Bar -->
+   <div id="searchBar" class="bg-white border-b sticky top-20 z-40 hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+     <div class="flex gap-3 items-center"><button id="backToHomeFromProducts" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center gap-2 whitespace-nowrap shadow-lg">
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+       </svg> Back to Home </button>
+      <div class="flex-1 flex gap-2"><input type="text" id="searchInput" placeholder="Search products by name or category..." class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"> <button id="searchBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap"> ?? Search </button> <button id="clearSearchBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap hidden"> Clear </button>
+      </div>
+     </div>
+    </div>
+   </div><!-- Category Filter -->
+   <div id="categoryFilter" class="bg-white border-b sticky top-36 z-40 hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+     <div class="flex gap-6 overflow-x-auto justify-center"><button class="category-btn active flex flex-col items-center gap-2 px-8 py-4 rounded-xl font-semibold whitespace-nowrap transition-all shadow-md hover:shadow-xl border-2" data-category="all"> <span class="text-4xl">???</span> <span>All Products</span> </button> <button class="category-btn flex flex-col items-center gap-2 px-8 py-4 rounded-xl font-semibold whitespace-nowrap transition-all shadow-md hover:shadow-xl border-2" data-category="makeup"> <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=60&amp;h=60&amp;fit=crop&amp;q=80" alt="Makeup" loading="lazy" class="w-12 h-12 rounded-lg object-cover" onerror="this.style.background='linear-gradient(135deg, #fce7f3 0%, #f9a8d4 100%)'; this.alt='??';"> <span>Makeup Kits</span> </button> <button class="category-btn flex flex-col items-center gap-2 px-8 py-4 rounded-xl font-semibold whitespace-nowrap transition-all shadow-md hover:shadow-xl border-2" data-category="fashion"> <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=60&amp;h=60&amp;fit=crop&amp;q=80" alt="T-Shirt" loading="lazy" class="w-12 h-12 rounded-lg object-cover" onerror="this.style.background='linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%)'; this.alt='??';"> <span>Men's T-Shirts</span> </button> <button class="category-btn flex flex-col items-center gap-2 px-8 py-4 rounded-xl font-semibold whitespace-nowrap transition-all shadow-md hover:shadow-xl border-2" data-category="electronics"> <img src="https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=60&amp;h=60&amp;fit=crop&amp;q=80" alt="Electronics" loading="lazy" class="w-12 h-12 rounded-lg object-cover" onerror="this.style.background='linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%)'; this.alt='??';"> <span>Electronics</span> </button> <button class="category-btn flex flex-col items-center gap-2 px-8 py-4 rounded-xl font-semibold whitespace-nowrap transition-all shadow-md hover:shadow-xl border-2" data-category="mobiles"> <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=60&amp;h=60&amp;fit=crop&amp;q=80" alt="Mobile" loading="lazy" class="w-12 h-12 rounded-lg object-cover" onerror="this.style.background='linear-gradient(135deg, #e0e7ff 0%, #a78bfa 100%)'; this.alt='??';"> <span>Mobiles</span> </button>
+     </div>
+    </div>
+   </div><!-- Products Grid -->
+   <main id="productsSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 hidden">
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><!-- Products will be inserted here -->
+    </div><!-- Bottom Back to Home Button -->
+    <div class="mt-12 flex justify-center"><button id="backToHomeFromBottom" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-12 py-5 rounded-full font-bold text-xl transition-all transform hover:scale-105 shadow-2xl flex items-center gap-3">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+      </svg> Return to Home Page </button>
+    </div>
+   </main><!-- Cart Modal -->
+   <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 modal-backdrop z-50">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90%] overflow-hidden modal-content">
+     <div class="p-6 border-b flex justify-between items-center">
+      <h3 class="text-2xl font-bold text-gray-900">Shopping Max AI</h3><button id="closeCartModal" class="text-gray-500 hover:text-gray-700 text-3xl leading-none"> </button>
+     </div>
+     <div id="cartItems" class="p-6 overflow-y-auto max-h-96"><!-- Cart items will be inserted here -->
+     </div>
+     <div class="p-6 border-t bg-gray-50">
+      <div class="flex justify-between items-center mb-4"><span class="text-xl font-semibold text-gray-900">Total:</span> <span id="cartTotal" class="text-2xl font-bold text-purple-600">???0</span>
+      </div><button id="checkoutBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors">Proceed to Checkout</button>
+     </div>
+    </div>
+   </div><!-- Step 1: Address Page -->
+   <div id="addressPage" class="fixed inset-0 bg-gray-50 hidden z-50 overflow-auto">
+    <div class="max-w-4xl mx-auto py-8 px-4"><!-- Progress Steps -->
+     <div class="mb-8">
+      <div class="flex items-center justify-center">
+       <div class="flex items-center">
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-semibold">
+          1
+         </div><span class="ml-2 font-medium text-purple-600">Address</span>
+        </div>
+        <div class="w-20 h-1 bg-gray-300 mx-4"></div>
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-semibold">
+          2
+         </div><span class="ml-2 font-medium text-gray-500">Payment</span>
+        </div>
+        <div class="w-20 h-1 bg-gray-300 mx-4"></div>
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-semibold">
+          3
+         </div><span class="ml-2 font-medium text-gray-500">Confirmation</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white rounded-2xl shadow-lg p-8">
+      <div class="flex justify-between items-center mb-6">
+       <div class="flex items-center gap-4"><button id="backToCartFromAddress" class="bg-gray-200 hover:bg-gray-300 text-gray-800 p-3 rounded-lg transition-all transform hover:scale-105 flex items-center">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+         </svg></button>
+        <h2 class="text-3xl font-bold text-gray-900">Shipping Address</h2>
+       </div><button id="closeAddressPage" class="text-gray-500 hover:text-gray-700 text-3xl leading-none"> </button>
+      </div>
+      <form id="addressForm" class="space-y-6">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label for="addr_firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label> <input type="text" id="addr_firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="John">
+        </div>
+        <div><label for="addr_lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label> <input type="text" id="addr_lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Doe">
+        </div>
+        <div class="md:col-span-2"><label for="addr_email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label> <input type="email" id="addr_email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="john@example.com">
+        </div>
+        <div class="md:col-span-2"><label for="addr_phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label> <input type="tel" id="addr_phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="+91 98765 43210">
+        </div>
+        <div class="md:col-span-2"><label for="addr_address1" class="block text-sm font-medium text-gray-700 mb-2">Address Line 1 *</label> <input type="text" id="addr_address1" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="123 Main Street">
+        </div>
+        <div class="md:col-span-2"><label for="addr_address2" class="block text-sm font-medium text-gray-700 mb-2">Address Line 2 (Optional)</label> <input type="text" id="addr_address2" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Apartment, suite, etc.">
+        </div>
+        <div><label for="addr_city" class="block text-sm font-medium text-gray-700 mb-2">City *</label> <input type="text" id="addr_city" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Mumbai">
+        </div>
+        <div><label for="addr_state" class="block text-sm font-medium text-gray-700 mb-2">State *</label> <input type="text" id="addr_state" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Maharashtra">
+        </div>
+        <div><label for="addr_zipCode" class="block text-sm font-medium text-gray-700 mb-2">PIN Code *</label> <input type="text" id="addr_zipCode" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="400001">
+        </div>
+        <div><label for="addr_country" class="block text-sm font-medium text-gray-700 mb-2">Country *</label> <input type="text" id="addr_country" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="India">
+        </div>
+       </div><!-- Order Summary Sidebar -->
+       <div class="bg-gray-50 p-6 rounded-lg mt-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
+        <div id="addressOrderSummary" class="space-y-3 mb-4"><!-- Items will be inserted here -->
+        </div>
+        <div class="border-t pt-4 flex justify-between items-center"><span class="text-lg font-semibold text-gray-900">Total:</span> <span id="addressTotal" class="text-2xl font-bold text-purple-600">?0</span>
+        </div>
+       </div>
+       <div class="flex gap-4"><button type="button" id="backToCart" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-4 rounded-lg font-semibold text-lg transition-colors">Back to Cart</button> <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors">Continue to Payment ?</button>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div><!-- Step 2: Payment Page -->
+   <div id="paymentPage" class="fixed inset-0 bg-gray-50 hidden z-50 overflow-auto">
+    <div class="max-w-4xl mx-auto py-8 px-4"><!-- Progress Steps -->
+     <div class="mb-8">
+      <div class="flex items-center justify-center">
+       <div class="flex items-center">
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-semibold">
+          ?
+         </div><span class="ml-2 font-medium text-green-600">Address</span>
+        </div>
+        <div class="w-20 h-1 bg-purple-600 mx-4"></div>
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-semibold">
+          2
+         </div><span class="ml-2 font-medium text-purple-600">Payment</span>
+        </div>
+        <div class="w-20 h-1 bg-gray-300 mx-4"></div>
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-semibold">
+          3
+         </div><span class="ml-2 font-medium text-gray-500">Confirmation</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white rounded-2xl shadow-lg p-8">
+      <div class="flex justify-between items-center mb-6">
+       <div class="flex items-center gap-4"><button id="backToAddressFromPayment" class="bg-gray-200 hover:bg-gray-300 text-gray-800 p-3 rounded-lg transition-all transform hover:scale-105 flex items-center">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+         </svg></button>
+        <h2 class="text-3xl font-bold text-gray-900">Payment Method</h2>
+       </div><button id="closePaymentPage" class="text-gray-500 hover:text-gray-700 text-3xl leading-none"> </button>
+      </div><!-- Demo Warning -->
+      <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 mb-6">
+       <p class="text-yellow-800 font-semibold">?? DEMO PROTOTYPE ONLY</p>
+       <p class="text-yellow-700 text-sm mt-1">This is a non-functional prototype. Do not enter real payment information.</p>
+      </div>
+      <form id="paymentForm" class="space-y-6"><!-- Payment Methods -->
+       <div><label class="block text-sm font-medium text-gray-700 mb-4">Select Payment Method</label>
+        <div class="space-y-3"><label class="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-purple-500 transition-colors"> <input type="radio" name="paymentMethod" value="card" checked class="w-5 h-5 text-purple-600"> <span class="ml-3 font-medium text-gray-900">?? Credit / Debit Card</span> </label> <label class="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-purple-500 transition-colors"> <input type="radio" name="paymentMethod" value="upi" class="w-5 h-5 text-purple-600"> <span class="ml-3 font-medium text-gray-900">?? UPI</span> </label> <label class="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-purple-500 transition-colors"> <input type="radio" name="paymentMethod" value="netbanking" class="w-5 h-5 text-purple-600"> <span class="ml-3 font-medium text-gray-900">?? Net Banking</span> </label> <label class="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-purple-500 transition-colors"> <input type="radio" name="paymentMethod" value="cod" class="w-5 h-5 text-purple-600"> <span class="ml-3 font-medium text-gray-900">?? Cash on Delivery</span> </label>
+        </div>
+       </div><!-- Card Details (Demo - Disabled) -->
+       <div id="cardDetails" class="space-y-4 opacity-50">
+        <div><label for="pay_cardNumber" class="block text-sm font-medium text-gray-700 mb-2">Card Number (Demo)</label> <input type="text" id="pay_cardNumber" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" placeholder="                   ">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+         <div><label for="pay_expiry" class="block text-sm font-medium text-gray-700 mb-2">Expiry Date (Demo)</label> <input type="text" id="pay_expiry" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" placeholder="MM/YY">
+         </div>
+         <div><label for="pay_cvv" class="block text-sm font-medium text-gray-700 mb-2">CVV (Demo)</label> <input type="text" id="pay_cvv" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" placeholder="   ">
+         </div>
+        </div>
+        <div><label for="pay_cardName" class="block text-sm font-medium text-gray-700 mb-2">Cardholder Name (Demo)</label> <input type="text" id="pay_cardName" disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100" placeholder="John Doe">
+        </div>
+       </div><!-- Order Summary -->
+       <div class="bg-gray-50 p-6 rounded-lg mt-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
+        <div id="paymentOrderSummary" class="space-y-3 mb-4"><!-- Items will be inserted here -->
+        </div>
+        <div class="border-t pt-4 flex justify-between items-center"><span class="text-lg font-semibold text-gray-900">Total:</span> <span id="paymentTotal" class="text-2xl font-bold text-purple-600">?0</span>
+        </div>
+       </div>
+       <div class="flex gap-4"><button type="button" id="backToAddress" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-4 rounded-lg font-semibold text-lg transition-colors">? Back to Address</button> <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors">Complete Order ?</button>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div><!-- Step 3: Confirmation Page -->
+   <div id="confirmationPage" class="fixed inset-0 bg-gray-50 hidden z-50 overflow-auto">
+    <div class="max-w-4xl mx-auto py-8 px-4"><!-- Progress Steps -->
+     <div class="mb-8">
+      <div class="flex items-center justify-center">
+       <div class="flex items-center">
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-semibold">
+          ?
+         </div><span class="ml-2 font-medium text-green-600">Address</span>
+        </div>
+        <div class="w-20 h-1 bg-green-500 mx-4"></div>
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-semibold">
+          ?
+         </div><span class="ml-2 font-medium text-green-600">Payment</span>
+        </div>
+        <div class="w-20 h-1 bg-green-500 mx-4"></div>
+        <div class="flex items-center">
+         <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-semibold">
+          ?
+         </div><span class="ml-2 font-medium text-green-600">Confirmation</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+       <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+       </svg>
+      </div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Order Confirmed!</h2>
+      <p class="text-lg text-gray-600 mb-2">Thank you for your order</p>
+      <p class="text-sm text-yellow-600 font-medium mb-8">?? This is a demo prototype - no actual order was placed</p>
+      <div class="bg-gray-50 rounded-lg p-6 mb-8">
+       <div class="flex justify-between items-center mb-4"><span class="text-gray-600">Order Number:</span> <span id="orderNumber" class="font-semibold text-gray-900">#DEMO-12345</span>
+       </div>
+       <div class="flex justify-between items-center mb-4"><span class="text-gray-600">Order Date:</span> <span id="orderDate" class="font-semibold text-gray-900"></span>
+       </div>
+       <div class="flex justify-between items-center"><span class="text-gray-600">Total Amount:</span> <span id="confirmationTotal" class="text-xl font-bold text-purple-600">?0</span>
+       </div>
+      </div><!-- Order Details -->
+      <div class="text-left mb-8">
+       <h3 class="text-xl font-semibold text-gray-900 mb-4">Order Details</h3>
+       <div id="confirmationOrderItems" class="space-y-3"><!-- Items will be inserted here -->
+       </div>
+      </div><!-- Delivery Address -->
+      <div class="text-left mb-8 bg-gray-50 p-6 rounded-lg">
+       <h3 class="text-xl font-semibold text-gray-900 mb-4">Delivery Address</h3>
+       <div id="confirmationAddress" class="text-gray-700"><!-- Address will be inserted here -->
+       </div>
+      </div>
+      <div class="flex gap-4"><button id="continueShopping" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors">Continue Shopping</button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      store_name: "MAX AI DROPSHIP STORE",
+      tagline: "World-first where we meet the technology and trust of the customer",
+      hero_title: "Classic & Trendy Fashion Look",
+      hero_subtitle: "Shop the latest trends in makeup, fashion, electronics, and mobile devices",
+      cta_button: "Shop Now",
+      background_color: "#f9fafb",
+      card_background: "#ffffff",
+      primary_color: "#9333ea",
+      text_color: "#111827",
+      button_text_color: "#ffffff",
+      font_family: "Outfit",
+      font_size: 16
+    };
+
+    // Generate 1500 products dynamically
+    function generateProducts() {
+      const products = [];
+      const baseProducts = {
+        makeup: [
+          { name: "Professional Makeup Kit", image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&h=500&fit=crop&q=80" },
+          { name: "Luxury Beauty Collection", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&h=500&fit=crop&q=80" },
+          { name: "Natural Glow Essentials", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&h=500&fit=crop&q=80" },
+          { name: "Eyeshadow Palette", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=500&h=500&fit=crop&q=80" },
+          { name: "Lipstick Collection", image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&h=500&fit=crop&q=80" },
+          { name: "Foundation Kit", image: "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=500&h=500&fit=crop&q=80" },
+          { name: "Brush Set", image: "https://images.unsplash.com/photo-1631730486572-226d1f595b68?w=500&h=500&fit=crop&q=80" },
+          { name: "Skincare Combo", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&h=500&fit=crop&q=80" },
+          { name: "Highlighter Kit", image: "https://images.unsplash.com/photo-1627225924765-552d49cf47ad?w=500&h=500&fit=crop&q=80" },
+          { name: "Travel Makeup Set", image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&h=500&fit=crop&q=80" }
+        ],
+        fashion: [
+          { name: "Cotton Tee", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=500&fit=crop&q=80" },
+          { name: "V-Neck Shirt", image: "https://images.unsplash.com/photo-1622445275576-721325763afe?w=500&h=500&fit=crop&q=80" },
+          { name: "Graphic Print Tee", image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&h=500&fit=crop&q=80" },
+          { name: "Polo Shirt", image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500&h=500&fit=crop&q=80" },
+          { name: "Athletic Tee", image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&h=500&fit=crop&q=80" },
+          { name: "Casual Shirt", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=500&fit=crop&q=80" },
+          { name: "Long Sleeve", image: "https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=500&h=500&fit=crop&q=80" },
+          { name: "Striped Tee", image: "https://images.unsplash.com/photo-1618354691229-88d47f285158?w=500&h=500&fit=crop&q=80" },
+          { name: "Linen Shirt", image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500&h=500&fit=crop&q=80" },
+          { name: "Tank Top", image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&h=500&fit=crop&q=80" }
+        ],
+        electronics: [
+          { name: "Wireless Earbuds", image: "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=500&h=500&fit=crop&q=80" },
+          { name: "Smart Watch", image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&h=500&fit=crop&q=80" },
+          { name: "Bluetooth Speaker", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&h=500&fit=crop&q=80" },
+          { name: "Fast Charger", image: "https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=500&h=500&fit=crop&q=80" },
+          { name: "Power Bank", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500&h=500&fit=crop&q=80" },
+          { name: "LED Lamp", image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&h=500&fit=crop&q=80" },
+          { name: "Webcam", image: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=500&h=500&fit=crop&q=80" },
+          { name: "Gaming Mouse", image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=500&h=500&fit=crop&q=80" },
+          { name: "Keyboard", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&h=500&fit=crop&q=80" },
+          { name: "Wireless Charger", image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&h=500&fit=crop&q=80" }
+        ],
+        mobiles: [
+          { name: "Smartphone Pro", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&h=500&fit=crop&q=80" },
+          { name: "Budget Phone", image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&h=500&fit=crop&q=80" },
+          { name: "Gaming Phone", image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=500&h=500&fit=crop&q=80" },
+          { name: "Camera Phone", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&h=500&fit=crop&q=80" },
+          { name: "Flip Phone", image: "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=500&h=500&fit=crop&q=80" },
+          { name: "5G Phone", image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500&h=500&fit=crop&q=80" },
+          { name: "Compact Phone", image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=500&h=500&fit=crop&q=80" },
+          { name: "Battery Phone", image: "https://images.unsplash.com/photo-1599950755346-a3e58f84ca63?w=500&h=500&fit=crop&q=80" },
+          { name: "Fast Charge Phone", image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=500&h=500&fit=crop&q=80" },
+          { name: "Foldable Phone", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=500&h=500&fit=crop&q=80" }
+        ]
+      };
+
+      const variants = ["Pro", "Max", "Ultra", "Plus", "Lite", "Premium", "Elite", "Deluxe", "Standard", "Basic"];
+      const colors = ["Black", "White", "Blue", "Red", "Green", "Gray", "Silver", "Gold", "Rose", "Navy"];
+      const sizes = ["Small", "Medium", "Large", "XL", "XXL"];
+     
+      let id = 1;
+      const categories = Object.keys(baseProducts);
+     
+      // Generate 1500 products with category-specific pricing
+      for (let i = 0; i < 1500; i++) {
+        const category = categories[i % categories.length];
+        const baseProductList = baseProducts[category];
+        const baseProduct = baseProductList[i % baseProductList.length];
+       
+        const variant = variants[Math.floor(i / 10) % variants.length];
+        const color = colors[Math.floor(i / 15) % colors.length];
+        const size = category === 'fashion' ? ` ${sizes[i % sizes.length]}` : '';
+       
+        const name = `${baseProduct.name} ${variant} ${color}${size} #${id}`;
+       
+        // Category-specific pricing
+        let originalPrice, price, discount;
+        if (category === 'makeup') {
+          originalPrice = Math.floor(Math.random() * 1000) + 500; // 500-1500
+          discount = Math.floor(Math.random() * 30) + 10; // 10-40% discount
+          price = Math.floor(originalPrice * (1 - discount / 100));
+        } else if (category === 'fashion') {
+          originalPrice = Math.floor(Math.random() * 500) + 500; // 500-1000
+          discount = Math.floor(Math.random() * 30) + 10;
+          price = Math.floor(originalPrice * (1 - discount / 100));
+        } else if (category === 'electronics') {
+          originalPrice = Math.floor(Math.random() * 600) + 200; // 200-800
+          discount = Math.floor(Math.random() * 30) + 10;
+          price = Math.floor(originalPrice * (1 - discount / 100));
+        } else if (category === 'mobiles') {
+          originalPrice = Math.floor(Math.random() * 4500) + 10000; // 10000-14500
+          discount = Math.floor(Math.random() * 25) + 5; // 5-30% discount
+          price = Math.floor(originalPrice * (1 - discount / 100));
+        }
+       
+        products.push({
+          id: id++,
+          name: name,
+          category: category,
+          price: price,
+          originalPrice: originalPrice,
+          discount: discount,
+          image: baseProduct.image
+        });
+      }
+     
+      return products;
+    }
+
+    const products = generateProducts();
+
+    let cart = [];
+    let currentCategory = 'all';
+    let orderData = {};
+    let searchQuery = '';
+    let allProducts = [];
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = 'system-ui, -apple-system, sans-serif';
+
+      document.getElementById('storeName').textContent = config.store_name || defaultConfig.store_name;
+      document.getElementById('storeName').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('storeName').style.fontSize = `${baseSize * 2.5}px`;
+      document.getElementById('storeName').style.color = config.text_color || defaultConfig.text_color;
+
+      document.getElementById('tagline').textContent = config.tagline || defaultConfig.tagline;
+      document.getElementById('tagline').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('tagline').style.fontSize = `${baseSize * 0.875}px`;
+      document.getElementById('tagline').style.color = config.text_color || defaultConfig.text_color;
+
+      document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('heroTitle').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('heroTitle').style.fontSize = `${baseSize * 3}px`;
+
+      document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('heroSubtitle').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('heroSubtitle').style.fontSize = `${baseSize * 1.25}px`;
+
+      document.getElementById('ctaButton').textContent = config.cta_button || defaultConfig.cta_button;
+      document.getElementById('ctaButton').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('ctaButton').style.fontSize = `${baseSize * 1.25}px`;
+      document.getElementById('ctaButton').style.backgroundColor = config.card_background || defaultConfig.card_background;
+      document.getElementById('ctaButton').style.color = config.text_color || defaultConfig.text_color;
+
+      document.getElementById('app').style.backgroundColor = config.background_color || defaultConfig.background_color;
+
+      const cards = document.querySelectorAll('.product-card');
+      cards.forEach(card => {
+        card.style.backgroundColor = config.card_background || defaultConfig.card_background;
+      });
+
+      const buttons = document.querySelectorAll('.add-to-cart-btn');
+      buttons.forEach(btn => {
+        btn.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+        btn.style.color = config.button_text_color || defaultConfig.button_text_color;
+      });
+
+      document.querySelectorAll('.product-name').forEach(el => {
+        el.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        el.style.fontSize = `${baseSize * 1.125}px`;
+        el.style.color = config.text_color || defaultConfig.text_color;
+      });
+
+      document.querySelectorAll('.product-price').forEach(el => {
+        el.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        el.style.fontSize = `${baseSize * 1.25}px`;
+        el.style.color = config.primary_color || defaultConfig.primary_color;
+      });
+
+      const cartBtn = document.getElementById('cartBtn');
+      cartBtn.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+      cartBtn.style.color = config.button_text_color || defaultConfig.button_text_color;
+      cartBtn.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      cartBtn.style.fontSize = `${baseSize}px`;
+
+      const activeBtn = document.querySelector('.category-btn.active');
+      if (activeBtn) {
+        activeBtn.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+        activeBtn.style.color = config.button_text_color || defaultConfig.button_text_color;
+      }
+    }
+
+    function renderProducts(category = 'all', search = '') {
+      const grid = document.getElementById('productsGrid');
+     
+      // Filter by category
+      let filteredProducts = category === 'all' ? allProducts : allProducts.filter(p => p.category === category);
+     
+      // Filter by search query
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filteredProducts = filteredProducts.filter(p =>
+          p.name.toLowerCase().includes(searchLower) ||
+          p.category.toLowerCase().includes(searchLower)
+        );
+      }
+     
+      if (filteredProducts.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-20">
+            <p class="text-gray-500 text-xl mb-4">No products found</p>
+            <p class="text-gray-400">Try adjusting your search or filters</p>
+          </div>
+        `;
+        return;
+      }
+     
+      grid.innerHTML = filteredProducts.map(product => `
+        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="h-48 overflow-hidden bg-gray-100 relative">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #e0e7ff 0%, #fce7f3 100%)'; this.alt='Image unavailable';">
+            <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+              ${product.discount}% OFF
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="product-name font-semibold text-gray-900 mb-2">${product.name}</h3>
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex flex-col">
+                <span class="product-price font-bold text-purple-600">?${product.price.toLocaleString('en-IN')}</span>
+                <span class="text-sm text-gray-400 line-through">?${product.originalPrice.toLocaleString('en-IN')}</span>
+              </div>
+              <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors" data-id="${product.id}">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      onConfigChange(window.elementSdk ? window.elementSdk.config : defaultConfig);
+    }
+   
+    function performSearch() {
+      searchQuery = document.getElementById('searchInput').value;
+      renderProducts(currentCategory, searchQuery);
+     
+      // Show/hide clear button
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (searchQuery) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+    }
+   
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      renderProducts(currentCategory, '');
+    }
+
+    function updateCartDisplay() {
+      document.getElementById('cartCount').textContent = cart.length;
+      const cartItems = document.getElementById('cartItems');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+     
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+      } else {
+        cartItems.innerHTML = cart.map(item => `
+          <div class="flex justify-between items-center py-3 border-b">
+            <div class="flex items-center gap-3">
+              <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-16 h-16 object-cover rounded" onerror="this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+              <div>
+                <p class="font-medium text-gray-900">${item.name}</p>
+                <p class="text-sm text-gray-500">${item.category}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="font-semibold text-gray-900">?${item.price.toLocaleString('en-IN')}</span>
+              <button class="remove-from-cart text-red-500 hover:text-red-700 font-bold" data-id="${item.id}"> </button>
+            </div>
+          </div>
+        `).join('');
+      }
+     
+      document.getElementById('cartTotal').textContent = `?${total.toLocaleString('en-IN')}`;
+    }
+
+    function updateOrderSummary(containerId, totalId) {
+      const container = document.getElementById(containerId);
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+     
+      container.innerHTML = cart.map(item => `
+        <div class="flex justify-between text-sm">
+          <span class="text-gray-600">${item.name}</span>
+          <span class="text-gray-900 font-medium">?${item.price.toLocaleString('en-IN')}</span>
+        </div>
+      `).join('');
+     
+      document.getElementById(totalId).textContent = `?${total.toLocaleString('en-IN')}`;
+    }
+
+    // Search Event Listeners
+    document.getElementById('searchBtn').addEventListener('click', performSearch);
+   
+    document.getElementById('clearSearchBtn').addEventListener('click', clearSearch);
+   
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    // Event Listeners
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('add-to-cart-btn')) {
+        const productId = parseInt(e.target.dataset.id);
+        const product = allProducts.find(p => p.id === productId);
+        if (product) {
+          cart.push(product);
+          updateCartDisplay();
+          e.target.textContent = 'Added! ?';
+          setTimeout(() => {
+            e.target.textContent = 'Add to Cart';
+          }, 1000);
+        }
+      }
+
+      if (e.target.classList.contains('remove-from-cart')) {
+        const productId = parseInt(e.target.dataset.id);
+        const index = cart.findIndex(item => item.id === productId);
+        if (index > -1) {
+          cart.splice(index, 1);
+          updateCartDisplay();
+        }
+      }
+
+      if (e.target.classList.contains('category-btn')) {
+        document.querySelectorAll('.category-btn').forEach(btn => {
+          btn.classList.remove('active');
+          btn.style.backgroundColor = '';
+          btn.style.color = '';
+        });
+        e.target.classList.add('active');
+        const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+        e.target.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+        e.target.style.color = config.button_text_color || defaultConfig.button_text_color;
+        currentCategory = e.target.dataset.category;
+        renderProducts(currentCategory, searchQuery);
+      }
+    });
+
+    // Cart Modal
+    document.getElementById('cartBtn').addEventListener('click', () => {
+      document.getElementById('cartModal').classList.remove('hidden');
+      document.getElementById('cartModal').classList.add('flex');
+    });
+
+    document.getElementById('closeCartModal').addEventListener('click', () => {
+      document.getElementById('cartModal').classList.add('hidden');
+      document.getElementById('cartModal').classList.remove('flex');
+    });
+
+    // Checkout flow - Step 1: Address
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) {
+        return;
+      }
+      document.getElementById('cartModal').classList.add('hidden');
+      document.getElementById('cartModal').classList.remove('flex');
+      updateOrderSummary('addressOrderSummary', 'addressTotal');
+      document.getElementById('addressPage').classList.remove('hidden');
+    });
+
+    document.getElementById('closeAddressPage').addEventListener('click', () => {
+      document.getElementById('addressPage').classList.add('hidden');
+    });
+
+    document.getElementById('backToCart').addEventListener('click', () => {
+      document.getElementById('addressPage').classList.add('hidden');
+      document.getElementById('cartModal').classList.remove('hidden');
+      document.getElementById('cartModal').classList.add('flex');
+    });
+
+    document.getElementById('backToCartFromAddress').addEventListener('click', () => {
+      document.getElementById('addressPage').classList.add('hidden');
+      document.getElementById('cartModal').classList.remove('hidden');
+      document.getElementById('cartModal').classList.add('flex');
+    });
+
+    document.getElementById('addressForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+     
+      // Store address data
+      orderData = {
+        firstName: document.getElementById('addr_firstName').value,
+        lastName: document.getElementById('addr_lastName').value,
+        email: document.getElementById('addr_email').value,
+        phone: document.getElementById('addr_phone').value,
+        address1: document.getElementById('addr_address1').value,
+        address2: document.getElementById('addr_address2').value,
+        city: document.getElementById('addr_city').value,
+        state: document.getElementById('addr_state').value,
+        zipCode: document.getElementById('addr_zipCode').value,
+        country: document.getElementById('addr_country').value
+      };
+     
+      // Move to payment page
+      document.getElementById('addressPage').classList.add('hidden');
+      updateOrderSummary('paymentOrderSummary', 'paymentTotal');
+      document.getElementById('paymentPage').classList.remove('hidden');
+    });
+
+    // Step 2: Payment
+    document.getElementById('closePaymentPage').addEventListener('click', () => {
+      document.getElementById('paymentPage').classList.add('hidden');
+    });
+
+    document.getElementById('backToAddress').addEventListener('click', () => {
+      document.getElementById('paymentPage').classList.add('hidden');
+      document.getElementById('addressPage').classList.remove('hidden');
+    });
+
+    document.getElementById('backToAddressFromPayment').addEventListener('click', () => {
+      document.getElementById('paymentPage').classList.add('hidden');
+      document.getElementById('addressPage').classList.remove('hidden');
+    });
+
+    document.getElementById('paymentForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+     
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      orderData.paymentMethod = paymentMethod;
+     
+      // Move to confirmation page
+      document.getElementById('paymentPage').classList.add('hidden');
+      showConfirmationPage();
+      document.getElementById('confirmationPage').classList.remove('hidden');
+    });
+
+    // Step 3: Confirmation
+    function showConfirmationPage() {
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+     
+      // Generate random order number
+      const orderNum = 'DEMO-' + Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('orderNumber').textContent = '#' + orderNum;
+     
+      // Set order date
+      const orderDate = new Date().toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      document.getElementById('orderDate').textContent = orderDate;
+     
+      // Set total
+      document.getElementById('confirmationTotal').textContent = `?${total.toLocaleString('en-IN')}`;
+     
+      // Show order items
+      const itemsContainer = document.getElementById('confirmationOrderItems');
+      itemsContainer.innerHTML = cart.map(item => `
+        <div class="flex justify-between items-center py-3 border-b">
+          <div class="flex items-center gap-3">
+            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-16 h-16 object-cover rounded" onerror="this.style.background='#e5e7eb';">
+            <div>
+              <p class="font-medium text-gray-900">${item.name}</p>
+              <p class="text-sm text-gray-500">${item.category}</p>
+            </div>
+          </div>
+          <span class="font-semibold text-gray-900">?${item.price.toLocaleString('en-IN')}</span>
+        </div>
+      `).join('');
+     
+      // Show delivery address
+      const addressContainer = document.getElementById('confirmationAddress');
+      addressContainer.innerHTML = `
+        <p class="font-semibold mb-2">${orderData.firstName} ${orderData.lastName}</p>
+        <p>${orderData.address1}</p>
+        ${orderData.address2 ? `<p>${orderData.address2}</p>` : ''}
+        <p>${orderData.city}, ${orderData.state} ${orderData.zipCode}</p>
+        <p>${orderData.country}</p>
+        <p class="mt-2">Email: ${orderData.email}</p>
+        <p>Phone: ${orderData.phone}</p>
+      `;
+    }
+
+    document.getElementById('continueShopping').addEventListener('click', () => {
+      document.getElementById('confirmationPage').classList.add('hidden');
+      cart = [];
+      updateCartDisplay();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // CTA Button - Navigate to Products Page
+    function navigateToProducts() {
+      // Hide hero section
+      document.getElementById('heroSection').classList.add('hidden');
+     
+      // Show search bar, category filter, and products section
+      document.getElementById('searchBar').classList.remove('hidden');
+      document.getElementById('categoryFilter').classList.remove('hidden');
+      document.getElementById('productsSection').classList.remove('hidden');
+     
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function navigateToHome() {
+      // Show hero section
+      document.getElementById('heroSection').classList.remove('hidden');
+     
+      // Hide search bar, category filter, and products section
+      document.getElementById('searchBar').classList.add('hidden');
+      document.getElementById('categoryFilter').classList.add('hidden');
+      document.getElementById('productsSection').classList.add('hidden');
+     
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('ctaButton').addEventListener('click', navigateToProducts);
+    document.getElementById('startShoppingBtn').addEventListener('click', navigateToProducts);
+    document.getElementById('backToHomeFromProducts').addEventListener('click', navigateToHome);
+    document.getElementById('backToHomeFromBottom').addEventListener('click', navigateToHome);
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.card_background || defaultConfig.card_background,
+              set: (value) => {
+                config.card_background = value;
+                window.elementSdk.setConfig({ card_background: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.button_text_color || defaultConfig.button_text_color,
+              set: (value) => {
+                config.button_text_color = value;
+                window.elementSdk.setConfig({ button_text_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["store_name", config.store_name || defaultConfig.store_name],
+          ["tagline", config.tagline || defaultConfig.tagline],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+          ["cta_button", config.cta_button || defaultConfig.cta_button]
+        ])
+      });
+    }
+
+    allProducts = products;
+    renderProducts();
+    updateCartDisplay();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c89ad1f630b3e15',t:'MTc3MDIwMjk1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
